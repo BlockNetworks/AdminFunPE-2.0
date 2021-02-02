@@ -30,7 +30,7 @@ use AdminFun\listeners\ConfuseListener;
 use AdminFun\listeners\FreezeListener;
 use AdminFun\listeners\InvLockListener;
 
-class AdminFun extends PluginBase{
+class AdminFun extends PluginBase {
 	
 	private $lock = [];
 
@@ -38,8 +38,8 @@ class AdminFun extends PluginBase{
 
 	private $confuse = [];
 
-	public function onEnable(){
-		if(! is_dir($this->getDataFolder())){
+	public function onEnable() {
+		if (! is_dir($this->getDataFolder())) {
 			mkdir($this->getDataFolder());
 		}
 		$this->saveDefaultConfig();
@@ -52,50 +52,50 @@ class AdminFun extends PluginBase{
 		$this->getLogger()->info("§aLoaded Successfully!");
 	}
 
-	public function onDisable(){
+	public function onDisable() {
 		unlink($this->getDataFolder() . "dpdata.yml");
 	}
 	
 	// INVLOCK API
-	public function isLocked(Player $player){
+	public function isLocked(Player $player) {
 		return in_array($player->getName(), $this->lock);
 	}
 
-	public function lock(Player $player){
+	public function lock(Player $player) {
 		$this->lock[$player->getName()] = $player->getName();
 	}
 
-	public function unlock(Player $player){
+	public function unlock(Player $player) {
 		unset($this->lock[$player->getName()]);
 	}	
 	// FREEZE API
-	public function isFrozen(Player $player){
+	public function isFrozen(Player $player) {
 		return in_array($player->getName(), $this->frozen);
 	}
 
-	public function freeze(Player $player){
+	public function freeze(Player $player) {
 		$this->frozen[$player->getName()] = $player->getName();
 	}
 
-	public function unfreeze(Player $player){
+	public function unfreeze(Player $player) {
 		unset($this->frozen[$player->getName()]);
 	}
 	
 	// CONFUSE API
-	public function confuse(Player $player){
+	public function confuse(Player $player) {
 		$this->confuse[$player->getName()] = $player->getName();
 	}
 
-	public function unConfuse(Player $player){
+	public function unConfuse(Player $player) {
 		unset($this->confuse[$player->getName()]);
 	}
 
-	public function isConfused(Player $player){
+	public function isConfused(Player $player) {
 		return in_array($player->getName(), $this->confuse);
 	}
 	
 	// DROPPARTY API
-	public function getDpdata(){
+	public function getDpdata() {
 		return $this->dpdata;
 	}
 
